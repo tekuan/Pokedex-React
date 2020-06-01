@@ -1,0 +1,25 @@
+.navbar li {
+    font-size: 25px;
+    display: inline;
+    margin: 0 55px;
+    
+}
+
+.navbar li:nth-child(3) {
+    font-size: 25px;
+    position: relative;
+    float: right;    
+}
+
+.navbar {
+    background-color: rgb(17, 173, 224);
+    padding: 2vh;
+    z-index: 100;
+    top: 0;
+    position: sticky;    
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+}
