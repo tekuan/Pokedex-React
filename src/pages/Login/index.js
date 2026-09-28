@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './style.css';
 
@@ -8,7 +8,7 @@ export default function Login() {
     
     const[usuario, setUsuario] = useState([]);
     const[data, setData] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
     let list = [];
     let login = 0;
     // const usuarioAtual = localStorage.getItem('usuario');
@@ -43,7 +43,7 @@ export default function Login() {
              
         if(login === 1) {
 
-          history.push('/home');
+          navigate('/home');
           alert('Login autorizado...');
 
         }else {
@@ -54,7 +54,7 @@ export default function Login() {
               .then((res) => {
                 console.log(res);
                 alert('Novo usuário criado!');
-                history.push('/home');                
+                navigate('/home');                
               })
               .catch(function (error) {
                 console.log(error);
@@ -64,8 +64,8 @@ export default function Login() {
     }
 
     return(
-      <div class="box-container">
-        <div class="box">
+      <div className="box-container">
+        <div className="box">
             <form onSubmit={handleLogin}>
 
                 <h1>POKÉDEX</h1>

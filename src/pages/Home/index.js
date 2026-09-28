@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Navbar from '../../navbar';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './style.css'
 
 
@@ -10,7 +10,7 @@ export default function Home() {
    const [data, setData] = React.useState([]);
    const list = [];
    
-   const history = useHistory();
+   const navigate = useNavigate();
 
    //GET => recebendo os dados dos pokemons
 
@@ -40,7 +40,7 @@ export default function Home() {
          return p.name;
       })
 
-      history.push("/pokemon");      
+      navigate.push("/pokemon");      
    }
 
    return(
