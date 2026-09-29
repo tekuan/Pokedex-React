@@ -1,40 +1,29 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../services/api';
 import './style.css';
 
 export default function Login() {
 
     
-    const[usuario, setUsuario] = useState([]);
-    const[data, setData] = useState([]);
+    const[usuario, setUsuario] = useState('');
     const navigate = useNavigate();
-    let list = [];
     let login = 0;
-    // const usuarioAtual = localStorage.getItem('usuario');
 
-    React.useEffect(() => {
-      axios
-         .get(`https://pokedex20201.herokuapp.com/users`)
-         .then((res) => {
-           setData(res.data.data)
-           console.log(res.data.data)
-          });
-   }, []);
+  React.useEffect(() => {
+    if(!usuario) return
+    api
+      .get(`/users/${usuario}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data) {
+          login = 1;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })},[usuario]);
 
-   data.map(k => {
-     list.push(k.username);
-     return list;
-   })
-
-   for(let i=0; i<list.length; i++) {
-     if(list[i] === usuario) {
-        login = 1;
-     }
-
-   } 
-
-   console.log(list);
 
    async function handleLogin(e) {
         e.preventDefault();
@@ -47,8 +36,8 @@ export default function Login() {
           alert('Login autorizado...');
 
         }else {
-            await axios
-              .post('https://pokedex20201.herokuapp.com/users', {
+            await api
+              .post('/users', {
                 username: usuario
               })
               .then((res) => {
