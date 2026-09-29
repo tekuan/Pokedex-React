@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import api from '../../services/api';
 import Navbar from '../../navbar';
 import { useNavigate } from 'react-router-dom';
 import './style.css'
@@ -15,8 +15,8 @@ export default function Home() {
    //GET => recebendo os dados dos pokemons
 
    React.useEffect(() => {
-      axios
-         .get('https://pokedex20201.herokuapp.com/pokemons')
+      api
+         .get('/pokemons')
          .then((res) => setData(res.data.data));
    }, []);
 
@@ -40,7 +40,7 @@ export default function Home() {
          return p.name;
       })
 
-      navigate.push("/pokemon");      
+      navigate("/pokemon");      
    }
 
    return(

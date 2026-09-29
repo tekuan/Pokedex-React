@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../../navbar';
-import axios from 'axios';
+import api from '../../services/api';
 import PokeBall from '../../assets/PokeBall.png';
 import './style.css';
 
@@ -16,9 +16,9 @@ export default function PerfilPokemon() {
    //GET => dados do pokemon registrado no localStorage
 
     React.useEffect(() => {
-       axios
-          .get(`https://pokedex20201.herokuapp.com/pokemons/${descriptionPokemon}`)
-          .then((res) => setData(res.data));
+      api
+         .get(`/pokemons/${descriptionPokemon}`)
+         .then((res) => setData(res.data));
     }, [descriptionPokemon]);
 
     console.log(data);
@@ -33,8 +33,8 @@ export default function PerfilPokemon() {
 
      let username = localStorage.getItem('usuario');
       
-         axios
-           .post(`https://pokedex20201.herokuapp.com/users/${username}/starred/${descriptionPokemon}`)
+         api
+           .post(`/users/${username}/starred/${descriptionPokemon}`)
            .then(() => {
              alert('Pokemon capturado!');
            })
